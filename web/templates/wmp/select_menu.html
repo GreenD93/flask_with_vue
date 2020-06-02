@@ -1,0 +1,19 @@
+<v-container>
+    <template>
+            <v-layout align-center>
+                <v-flex xs12 sm4 text-xs-center>
+                  <div>
+                       <v-col class="d-flex" cols="12" sm="6">
+                        <v-select
+                          :items="items"
+                          label="Standard"
+                          v-model="selected_item"
+                          dense
+                        ></v-select>
+                      </v-col>
+                      <v-btn small @click='test_function'>Submit</v-btn>
+                  </div>
+                </v-flex>
+            </v-layout>
+    </template>
+</v-container>

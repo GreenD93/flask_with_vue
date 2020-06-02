@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+
+<p>Canvas:</p>
+<canvas id="myCanvas" width="200" height="200" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+
+<script>
+    const img = new Image();
+    img.src = 'https://view01.wemep.co.kr/wmp-product/9/726/865437269/865437269.jpg?1585809380';
+    window.onload = function() {
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");
+      ctx.drawImage(img, 0, 0, 200, 200);
+    };
+</script>
+
+</body>
+</html>

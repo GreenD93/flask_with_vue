@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TEST</title>
+</head>
+
+<body>
+    <v-btn ></v-btn>
+
+    <p>time : <span id="time"></span></p>
+    <input type="button" id="execute" value="execute" />
+
+    <div id="app">
+      {{ message }}
+    </div>
+
+</body>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="/static/vue.min.js"></script>
+<script src="/static/vuetify.min.js"></script>
+<script src="/static/tweenjs-0.6.2.min.js"></script>
+<script src="/static/axios.min.js"></script>
+<script>
+    var app = new Vue({
+  el: '#app',
+  data: {
+    message: '안녕하세요 Vue!'
+  }
+})
+</script>
+<script>
+    $('#execute').click(function(){
+        $.ajax({
+            url: 'http://127.0.0.1:8080/run_model',
+            type: 'POST',
+            success: Is_ok
+        });
+    });
+
+    function Is_ok(data){
+        if(data.status == '1') {
+            alert('csv가 만들어지는 중이니 잠시만 기다려주세요.')
+        } else{
+            window.location = 'http://127.0.0.1:8080/get_csv'
+        }
+    };
+</script>
+
+</html>

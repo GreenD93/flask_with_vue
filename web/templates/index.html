@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<base href="/" />
+<html>
+<head>
+    <!--    Install Material Icons-->
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+    <!--    Install Material Icons-->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+
+<div id="app">
+    <v-app id="app">
+        <v-flex xs12>
+            <v-layout row wrap>
+            <file-upload></file-upload>
+            <select-menu></select-menu>
+            </v-layout>
+        </v-flex>
+    </v-app>
+</div>
+
+</body>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- 컴포넌트 추가시 여기에 -->
+    <script>{% include 'wmp/file_upload.js' %}</script>
+    <script>{% include 'wmp/select_menu.js' %}</script>
+    <!-- 컴포넌트 추가시 여기에 -->
+
+    <script>
+      var vue = new Vue({
+        el: "#app",
+        vuetify: new Vuetify()
+      });
+    </script>
+</html>

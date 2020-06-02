@@ -1,0 +1,12 @@
+<v-container fluid style="width: 20%">
+    <template id="upload_temp">
+        <v-layout align-center>
+            <v-flex xs12 sm4 text-xs-center>
+                <form id="upload_form" role="form" enctype="multipart/form-data" method="POST">
+                    <v-file-input id="file" label="upload file"></v-file-input>
+                    <v-btn small class="mr-4" @click="upload" >Upload</v-btn>
+                </form>
+            </v-flex>
+        </v-layout>
+    </template>
+</v-container>
