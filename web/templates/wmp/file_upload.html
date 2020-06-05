@@ -1,11 +1,31 @@
-<v-container fluid style="width: 20%">
+<v-container fluid style="width: 40%">
     <template id="upload_temp">
         <v-layout align-center>
             <v-flex xs12 sm4 text-xs-center>
-                <form id="upload_form" role="form" enctype="multipart/form-data" method="POST">
-                    <v-file-input id="file" label="upload file"></v-file-input>
-                    <v-btn small class="mr-4" @click="upload" >Upload</v-btn>
-                </form>
+<!--                <form id="upload_form" role="form" enctype="multipart/form-data" method="POST">-->
+                    <v-layout align-center justify-start row>
+<!--                        <v-file-input id="file" label="upload file" outlined dense ></v-file-input>-->
+                              <v-file-input
+                                id="file"
+                                v-model="files"
+                                placeholder="Upload file"
+                                label="File input"
+                                multiple
+                                prepend-icon="mdi-paperclip"
+                              >
+                                <template v-slot:selection="{ text }">
+                                  <v-chip
+                                    small
+                                    label
+                                    color="primary"
+                                  >
+                                    {{ text }}
+                                  </v-chip>
+                                </template>
+                              </v-file-input>
+                            <v-btn x-small class="mr-4" @click="upload" >Upload</v-btn>
+                    </v-layout>
+<!--                </form>-->
             </v-flex>
         </v-layout>
     </template>

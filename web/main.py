@@ -31,6 +31,9 @@ app.jinja_options = jinja_options
 
 @app.route("/product/byCategory", methods=['GET'])
 def product():
+    # test
+    # curl -X GET "http://127.0.0.1:8080/product/byCategory?lastProductId=251187412&lastTimestamp=1566831600&categoryId=10000000%20(%EC%97%AC%EC%84%B1)" -H "accept: application/json"
+    # curl -X GET "http://34.84.27.156/product/byCategory?lastProductId=1107055443&lastTimestamp=1591161992&categoryId=10000000%20(%EC%97%AC%EC%84%B1)" -H "accept: application/json"
 
     headers = {'Content-Type': "application/json", 'accept': "application/json"}
 
@@ -40,12 +43,15 @@ def product():
 
     # data json화 시켜줘야 함.
     data = {
-        'list': [
-                    {'a':a, 'b':b, 'c':c}
+        "list": [
+                    {'a':a, 'b':b, 'c':c},
+                    {'a': a, 'b': b, 'c': c}
+
                 ]
         }
 
     data = json.dumps(data)
+    print(data)
     requests.put('http://127.0.0.1:8080/product/beauty', data=data, headers=headers)
     # Response(json.dumps(data), mimetype="application/json")
 
