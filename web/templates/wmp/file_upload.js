@@ -8,13 +8,13 @@ Vue.component('file-upload', {
    methods: {
 
         upload: function(){
+            alert('working');
             var data = new FormData();
-              data.append('foo', 'bar');
               data.append('file', document.getElementById('file').files[0]);
 
               axios.request({
                   method: 'post',
-                  url: '/upload',
+                  url: './upload',
                   data: data
               })
 

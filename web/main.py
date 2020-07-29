@@ -2,7 +2,7 @@
 
 from flask import Flask, request, Response, url_for, render_template, request, redirect, session, make_response, json
 from flask_cors import CORS
-
+import pandas
 
 
 from werkzeug.utils import secure_filename
@@ -67,15 +67,23 @@ def beauty_score():
 
 @app.route("/upload", methods=['GET','POST'])
 def upload_file():
-    if request.method == 'POST':
-        file = request.files['file']
-        read_file = file.read()
-        data = read_file.decode('utf-8').splitlines()
-        print(data)
-        filename = secure_filename(file.filename)
-        print(filename)
+    print('file upload!!')
+    f = request.files['file']
+    print(f)
+    f.save('test.xlsb')
 
-    return 'success'
+    #file = request.files['file']
+    #file.save('test.xlsb')
+
+        # print('>>>', request.files)
+        # read_file = file.read()
+        #
+        # data = read_file.decode('utf-8').splitlines()
+        # print('<<<', data)
+        # filename = secure_filename(file.filename)
+        # print('>>>', filename)
+
+    return index()
 
 @app.route("/main", methods=['GET', 'POST'])
 def hello():
