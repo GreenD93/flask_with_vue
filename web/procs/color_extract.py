@@ -47,7 +47,9 @@ class ColorExtractor():
         kmeans = KMeans(n_clusters=self.n_colors, random_state=42).fit(arr)
         labels = kmeans.labels_
         centroids = kmeans.cluster_centers_
+
         less_colors = centroids[labels].reshape(img.shape).astype('uint8')  # array label mapping
+        print(centroids.astype('uint8'))
 
         # recovery [255,0,255]
         indices = np.where( (img == self.bg_color).all(axis = 2) )
@@ -73,6 +75,9 @@ class ColorExtractor():
 
             color_str_key = '#' + '{:02x}'.format(r) +  '{:02x}'.format(g) +  '{:02x}'.format(b)
             portion_dict[color_str_key] = counts[i]
+
+        # sorting values
+        portion_dict = {k: v for k, v in sorted(portion_dict.items(), key=lambda item: item[1], reverse=True)}
 
         return portion_dict
 
@@ -142,6 +147,7 @@ class ColorExtractor():
 
         # extract color
         simplified_img = self._get_simplified_img(fg_img)
+
         portion_dict = self._get_color_portion(simplified_img)
 
         # pixel 테스트용

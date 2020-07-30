@@ -33,11 +33,15 @@ Vue.component('color-box', {
 
               .then((response) => {
                   var img_url = response.data.img_url
-                  var dominant_color = response.data.color
+                  var color_1st = response.data.color_1st
+                  var color_2nd = response.data.color_2nd
 
                   document.getElementById('blah').src=img_url
-                  document.getElementById('color_box').style.backgroundColor=dominant_color
-                  document.getElementById('color_code').innerHTML = dominant_color
+                  document.getElementById('color_box_1st').style.backgroundColor=color_1st
+                  document.getElementById('color_box_2nd').style.backgroundColor=color_2nd
+
+                  document.getElementById('color_code_1st').innerHTML = color_1st
+                  document.getElementById('color_code_2nd').innerHTML = color_2nd
               })
 
               .catch((err) => {

@@ -4,7 +4,7 @@
         <v-flex xs8>
             <v-text-field
                 style="margin-top:-10px;"
-                label="딜ID"
+                label="프로드ID"
                 single-line
                 hide-details
                 clearable='true'
@@ -27,15 +27,25 @@
         </div>
 
         <div style = 'margin:20px; width:150px;'>
-            <p>Dominant color:</p>
+            <p><b>Dominant color:</b></p>
 
-            <span
-                id="color_box"
-                v-bind:style="{ backgroundColor: tweenedCSSColor }"
-                style="display:inline-block; width:50px; height:50px;"
-            ></span>
+            <div>
+                <span
+                    id="color_box_1st"
+                    v-bind:style="{ backgroundColor: tweenedCSSColor } "
+                    style="display:inline-block; width:20px; height:20px;"
+                ></span>
 
-            <p id="color_code">{{ tweenedCSSColor }}</p>
+                <span
+                    id="color_box_2nd"
+                    v-bind:style="{ backgroundColor: tweenedCSSColor }"
+                    style="display:inline-block; width:20px; height:20px;"
+                ></span>
+            </div>
+
+            <p id="color_code_1st" style="display:inline">{{ tweenedCSSColor }}</p>
+            <p id="color_code_2nd" style="display:inline">{{ tweenedCSSColor }}</p>
+
         </div>
     </template>
 </v-container>

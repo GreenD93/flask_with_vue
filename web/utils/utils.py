@@ -20,6 +20,35 @@ def load_img_from_url(url):
 
 #----------------------------------
 # prod 이미지 경로
+def make_wmp_prod_img_url(prod_id, cur_sec=-1, wide=False):
+
+    #https://view01.wemep.co.kr/wmp-product/9/479/107174799/107174799.jpg?1534775126
+
+    str_prod_id = str(prod_id)
+    last_char = str_prod_id[-1:]
+    mid_chars = str_prod_id[-4:-1]
+
+    if not wide:
+        img_url = 'https://view01.wemep.co.kr/wmp-product/{}/{}/{}/{}.jpg?{}'.format(
+                        last_char,
+                        mid_chars,
+                        str_prod_id,
+                        str_prod_id,
+                        cur_sec
+                    )
+    else:
+        img_url = 'https://view01.wemep.co.kr/wmp-product/{}/{}/{}/{}_wide.jpg?{}'.format(
+                        last_char,
+                        mid_chars,
+                        str_prod_id,
+                        str_prod_id,
+                        cur_sec
+                    )
+
+    return img_url
+
+#----------------------------------
+# deal 이미지 경로
 def make_wmp_deal_img_url(deal_id, cur_sec=-1, wide=False):
 
     #https://view01.wemep.co.kr/wmp-product/9/479/107174799/107174799.jpg?1534775126

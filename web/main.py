@@ -79,18 +79,25 @@ def extract_color():
     if request.method == 'POST':
 
         deal_id = json.loads(request.data.decode('utf8'))['deal_id']
-        img_url = make_wmp_deal_img_url(deal_id)
+        #img_url = make_wmp_deal_img_url(deal_id)
+        img_url = make_wmp_prod_img_url(deal_id)
         img, _ = load_img_from_url(img_url)
 
         # PIL로 읽었을 때는 img 차원 바꿔주어야함
         # Opencv로 읽었을 때는 pass
         img = img[:,:,::-1]
         color_result = eval(extractor.do(img))
-        dominant_hex_code = color_result[0]['rgb']
+
+        # color가 단일 컬러로 나올때를 대비해서..!
+        if len(color_result) > 1:
+            hex_code_1st, hex_code_2nd = color_result[0]['rgb'], color_result[1]['rgb']
+        else:
+            hex_code_1st, hex_code_2nd = color_result[0]['rgb'], None
 
         result = {
             'img_url': img_url,
-            'color' : dominant_hex_code
+            'color_1st' : hex_code_1st,
+            'color_2nd': hex_code_2nd
         }
 
         # color_box img input 미리보기 코드...
