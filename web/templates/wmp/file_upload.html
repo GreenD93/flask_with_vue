@@ -2,29 +2,18 @@
     <template id="upload_temp">
         <v-layout align-center>
             <v-flex xs12 sm3 text-xs-center>
-<!--                <form id="upload_form" role="form" enctype="multipart/form-data" method="POST">-->
                     <v-layout align-center justify-start row>
 
+                              <v-file-input
+                                id="file"
+                                placeholder="Upload file"
+                                label="File input"
+                                prepend-icon="mdi-paperclip"
+                              ></v-file-input>
 
-
-                        <form  action="./upload" method="POST" enctype="multipart/form-data">
-                            <input id="file" type="file" name="file">
                             <v-btn small class="mr-4" @click="upload" >Upload</v-btn>
-
-{#                            <input type="submit" style="border: 1px solid #ff0000;" onclick="success_msg();">#}
-                        </form>
-
-<!--                        <v-file-input id="file" label="upload file" outlined dense ></v-file-input>-->
-{#                              <v-file-input#}
-{#                                id="file"#}
-{#                                placeholder="Upload file"#}
-{#                                label="File input"#}
-{#                                prepend-icon="mdi-paperclip"#}
-{#                              ></v-file-input>#}
-
-{#                            <v-btn small class="mr-4" @click="upload" >Upload</v-btn>#}
                     </v-layout>
-<!--                </form>-->
+
             </v-flex>
         </v-layout>
     </template>

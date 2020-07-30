@@ -1,10 +1,41 @@
 <v-container>
     <template id="color_box">
-        <p>Preview:</p>
-        <span
-            v-bind:style="{ backgroundColor: tweenedCSSColor }"
-            style="display:inline-block; width:50px; height:50px;"
-        ></span>
-        <p>{{ tweenedCSSColor }}</p>
+
+        <v-flex xs8>
+            <v-text-field
+                style="margin-top:-10px;"
+                label="딜ID"
+                single-line
+                hide-details
+                clearable='true'
+                v-model="selected_deal_id"
+                @change=""
+                @input="">
+            </v-text-field>
+        </v-flex>
+{#        color_box img input 미리보기 코드...
+{#        <div>#}
+{#            <input style = 'margin:10px;' type='file' id='upload_img' onchange="readURL(this);" />#}
+{#        </div>#}
+
+        <div style = 'margin:10px;'>
+            <img style='width:200px; height:200px' id="blah" src="https://t1.daumcdn.net/cfile/tistory/99DA87365DDA5FBB0C" alt="upload image" />
+        </div>
+
+        <div>
+            <v-btn style = 'margin:10px;' small class="mr-4" @click="extract_color" >Extract Color</v-btn>
+        </div>
+
+        <div style = 'margin:20px; width:150px;'>
+            <p>Dominant color:</p>
+
+            <span
+                id="color_box"
+                v-bind:style="{ backgroundColor: tweenedCSSColor }"
+                style="display:inline-block; width:50px; height:50px;"
+            ></span>
+
+            <p id="color_code">{{ tweenedCSSColor }}</p>
+        </div>
     </template>
 </v-container>

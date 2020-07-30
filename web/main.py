@@ -2,15 +2,20 @@
 
 from flask import Flask, request, Response, url_for, render_template, request, redirect, session, make_response, json
 from flask_cors import CORS
-import pandas
 
-
-from werkzeug.utils import secure_filename
+# import numpy as np
+# import cv2
 
 import requests
 import json
 from io import StringIO
 import csv
+
+
+# color
+from procs.color_extract import ColorExtractor
+from utils.utils import *
+
 #-------------------------------------------------
 # app 설정
 app = Flask(__name__, static_url_path='/static')
@@ -28,7 +33,10 @@ jinja_options.update(dict(
 ))
 app.jinja_options = jinja_options
 
+extractor = ColorExtractor()
 
+
+## request function
 @app.route("/product/byCategory", methods=['GET'])
 def product():
     # test
@@ -65,23 +73,56 @@ def beauty_score():
     # Response('success', status=201, mimetype='application/json')
     return '200', 200
 
+# https://stackoverflow.com/questions/47515243/reading-image-file-file-storage-object-using-cv2
+@app.route("/extract_color", methods=['GET','POST'])
+def extract_color():
+    if request.method == 'POST':
+
+        deal_id = json.loads(request.data.decode('utf8'))['deal_id']
+        img_url = make_wmp_deal_img_url(deal_id)
+        img, _ = load_img_from_url(img_url)
+
+        # PIL로 읽었을 때는 img 차원 바꿔주어야함
+        # Opencv로 읽었을 때는 pass
+        img = img[:,:,::-1]
+        color_result = eval(extractor.do(img))
+        dominant_hex_code = color_result[0]['rgb']
+
+        result = {
+            'img_url': img_url,
+            'color' : dominant_hex_code
+        }
+
+        # color_box img input 미리보기 코드...
+        # image to numpy array
+        # filestr = request.files['file'].read()
+        # # DeprecationWarning: The binary mode of fromstring is deprecated, as it behaves surprisingly on unicode inputs. Use frombuffer instead
+        # np_img = np.frombuffer(filestr, np.uint8)
+        # img = cv2.imdecode(np_img, cv2.IMREAD_COLOR)
+        #
+        # color_result = eval(extractor.do(img))
+        # dominant_hex_code = color_result[0]['rgb']
+        #
+        # result = {
+        #     'color' : dominant_hex_code
+        # }
+
+    return result, 200
+
 @app.route("/upload", methods=['GET','POST'])
 def upload_file():
-    print('file upload!!')
     f = request.files['file']
-    print(f)
     f.save('test.xlsb')
 
     #file = request.files['file']
     #file.save('test.xlsb')
-
-        # print('>>>', request.files)
-        # read_file = file.read()
-        #
-        # data = read_file.decode('utf-8').splitlines()
-        # print('<<<', data)
-        # filename = secure_filename(file.filename)
-        # print('>>>', filename)
+    # print('>>>', request.files)
+    # read_file = file.read()
+    #
+    # data = read_file.decode('utf-8').splitlines()
+    # print('<<<', data)
+    # filename = secure_filename(file.filename)
+    # print('>>>', filename)
 
     return index()
 
