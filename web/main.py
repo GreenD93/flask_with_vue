@@ -86,18 +86,17 @@ def extract_color():
         # PIL로 읽었을 때는 img 차원 바꿔주어야함
         # Opencv로 읽었을 때는 pass
         img = img[:,:,::-1]
-        color_result = eval(extractor.do(img))
+        color_result = extractor.do(img)
+        origin = eval(color_result)
 
-        # color가 단일 컬러로 나올때를 대비해서..!
-        if len(color_result) > 1:
-            hex_code_1st, hex_code_2nd = color_result[0]['rgb'], color_result[1]['rgb']
-        else:
-            hex_code_1st, hex_code_2nd = color_result[0]['rgb'], None
+        if len(origin) == 1:
+            origin.append({'rgb':'#','inforeground':'0%','in_whole':'0%'})
+            color_result = json.dumps(origin, indent=4)
+
 
         result = {
             'img_url': img_url,
-            'color_1st' : hex_code_1st,
-            'color_2nd': hex_code_2nd
+            'color_result' : color_result
         }
 
         # color_box img input 미리보기 코드...

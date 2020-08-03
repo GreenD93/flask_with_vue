@@ -26,7 +26,7 @@
             <v-btn style = 'margin:10px;' small class="mr-4" @click="extract_color" >Extract Color</v-btn>
         </div>
 
-        <div style = 'margin:20px; width:150px;'>
+        <div style = 'margin:20px; width:500px;'>
             <p><b>Dominant color:</b></p>
 
             <div>
@@ -43,8 +43,11 @@
                 ></span>
             </div>
 
-            <p id="color_code_1st" style="display:inline">{{ tweenedCSSColor }}</p>
-            <p id="color_code_2nd" style="display:inline">{{ tweenedCSSColor }}</p>
+            <div style = 'margin-top:20px;'>
+                <p><b>Colors:</b></p>
+                <p id="color_code_1st" >{{ tweenedCSSColor }}</p>
+                <p id="color_code_2nd" >{{ tweenedCSSColor }}</p>
+            </div>
 
         </div>
     </template>

@@ -32,16 +32,30 @@ Vue.component('color-box', {
               })
 
               .then((response) => {
-                  var img_url = response.data.img_url
-                  var color_1st = response.data.color_1st
-                  var color_2nd = response.data.color_2nd
 
-                  document.getElementById('blah').src=img_url
-                  document.getElementById('color_box_1st').style.backgroundColor=color_1st
-                  document.getElementById('color_box_2nd').style.backgroundColor=color_2nd
+                  var img_url = response.data.img_url;
+                  var color_result = response.data.color_result;
+                  var color_dict = JSON.parse(color_result);
 
-                  document.getElementById('color_code_1st').innerHTML = color_1st
-                  document.getElementById('color_code_2nd').innerHTML = color_2nd
+                  var color_1st = color_dict[0];
+                  var color_2nd = color_dict[1];
+
+                  if (color_2nd.rgb =='#'){
+
+                      document.getElementById('color_box_2nd').style.display = 'none';
+
+                  } else {
+
+                      document.getElementById('color_box_2nd').style.backgroundColor=color_2nd.rgb;
+                      document.getElementById('color_code_2nd').innerHTML = '2nd color:<br>' + JSON.stringify(color_2nd, null, 4)
+
+                  };
+
+
+
+                  document.getElementById('blah').src=img_url;
+                  document.getElementById('color_box_1st').style.backgroundColor=color_1st.rgb;
+                  document.getElementById('color_code_1st').innerHTML = '1st color:<br>' + JSON.stringify(color_1st, null, 4)
               })
 
               .catch((err) => {

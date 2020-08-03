@@ -142,11 +142,16 @@ class ColorExtractor():
 
         # img = self._read_img(img_path)
         # remove bg
-        img = cv2.resize(img, (self.resize_width, self.resize_height))
+        img = cv2.resize(img, (self.resize_width, self.resize_height), interpolation=cv2.INTER_AREA)
         fg_img, valid_pixel_count = self.bg_remover.do(img)
+
+        cv2.imwrite('fg_img.jpg', fg_img)
+
+        #fg_img = cv2.resize(fg_img, (20, 20), interpolation=cv2.INTER_AREA)
 
         # extract color
         simplified_img = self._get_simplified_img(fg_img)
+        cv2.imwrite('simplified_img.jpg', simplified_img)
 
         portion_dict = self._get_color_portion(simplified_img)
 
